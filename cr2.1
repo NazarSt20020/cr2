@@ -1,0 +1,60 @@
+using System;
+namespace ConsoleApp1
+{
+    // Базовий клас
+    class A
+    {
+        // Захищені поля класу A
+        protected int a;
+        protected internal int aa;
+    }
+    // Похідний клас B
+    class B : A
+    {
+        // Захищені поля класу B
+        protected int b;
+        protected internal int bb;
+        public void MethodB()
+        {
+            // є доступ до protected та
+            // protected internal елементів класу A
+            a = 25;
+            aa = 30;
+        }
+    }
+    // Похідний клас C
+    class C : B
+    {
+        // Захищені поля класу C
+        protected int c;
+        protected internal int cc;
+        public void MethodC()
+        {
+            // є доступ до protected та
+            // protected internal елементів класів A, B
+            a = 10;
+            aa = 20;
+            b = 30;
+            bb = 40;
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Доступу з екземплярів класів до
+            // protected-елементів немає
+            A objA = new A(); // екземпляр класу A
+
+            B objB = new B();
+            C objC = new C();
+            
+            objA.aa = 40;
+            objB.aa = 50;
+            objB.bb = 50;
+            objC.aa = 10;
+            objC.bb = 20;
+            objC.cc = 30;
+        }
+    }
+}
